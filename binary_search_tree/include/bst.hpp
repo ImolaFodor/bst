@@ -257,8 +257,10 @@ class bst {
      */
     friend
     std::ostream& operator<<(std::ostream& os, const bst& x) {
+        const bst* bstp = &x; // get pointer from reference
+
         os << "Depth of the tree is: " << x.size() << "\n";
-        for(const_iterator it = x->begin(), end = x->end(); it != end; ++it){
+        for(const_iterator it = bstp->begin(), end = bstp->end(); it != end; ++it){
             os << "[ key=" << it->first <<" , value=" << it->second << " ] ";
         }
         os << std::endl;
