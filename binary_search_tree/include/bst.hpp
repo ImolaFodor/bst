@@ -209,7 +209,7 @@ class bst {
      * The bool is true if a new node has been allocated, false otherwise.
      */
     std::pair<iterator, bool> insert(const pair_type& x) {
-        return _insert(x);
+        return _insert(std::forward<pair_type>(x));
     }
     
     /** \brief insert node by pair
@@ -219,7 +219,7 @@ class bst {
      * The bool is true if a new node has been allocated, false otherwise.
      */
     std::pair<iterator, bool> insert(pair_type&& x) {
-        return _insert(std::move(x));
+        return _insert(std::forward<pair_type>(x));
     }
 
     /** \brief emplace element
@@ -303,7 +303,7 @@ template<typename key_type, typename value_type, typename comparison>
 template<typename O>
 std::pair<typename bst<key_type, value_type, comparison>::iterator, bool> bst<key_type, value_type, comparison>::_insert(O&& x){
     auto start = std::chrono::high_resolution_clock::now(); 
-    auto _node = new node<O>{std::forward<O>(x)};
+    auto _node = new node<O>{x};
     auto tmp = head.get();
     bool added = false;
     if (!tmp) {
